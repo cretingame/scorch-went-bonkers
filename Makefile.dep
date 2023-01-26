@@ -1,0 +1,441 @@
+src/engine/FPSCounter.o: src/engine/FPSCounter.cpp src/engine/TimeRoutines.h \
+ src/engine/FPSCounter.h
+src/engine/TimeKeeper.o: src/engine/TimeKeeper.cpp src/engine/TimeRoutines.h \
+ src/engine/TimeKeeper.h
+src/engine/TimeRoutines.o: src/engine/TimeRoutines.cpp
+src/engine/GLBitmap.o: src/engine/GLBitmap.cpp src/engine/../misc/Settings.h \
+ src/engine/GLBitmap.h src/engine/GLColor.h
+src/engine/GLTexture.o: src/engine/GLTexture.cpp src/engine/../misc/Settings.h \
+ src/engine/GLTexture.h
+src/engine/TextRenderer.o: src/engine/TextRenderer.cpp src/engine/GLColor.h \
+ src/engine/TextRenderer.h src/engine/../engine/GLColor.h \
+ src/engine/../engine/GLTexture.h
+src/decor/Trail.o: src/decor/Trail.cpp src/decor/Trail.h src/decor/../Classes.h \
+ src/decor/../entity/Entity.h src/decor/../entity/../Classes.h
+src/decor/SmokeTrail.o: src/decor/SmokeTrail.cpp src/decor/../misc/Random.h \
+ src/decor/../engine/GLBitmap.h src/decor/../engine/GLColor.h \
+ src/decor/../objects/Bullet.h src/decor/../objects/../engine/GLBitmap.h \
+ src/decor/../objects/../entity/Airborne.h \
+ src/decor/../objects/../entity/../Classes.h \
+ src/decor/../objects/../entity/../entity/Entity.h \
+ src/decor/../objects/../entity/../entity/../Classes.h \
+ src/decor/../objects/../Classes.h src/decor/../player/Player.h \
+ src/decor/../player/../Classes.h src/decor/../player/../engine/GLColor.h \
+ src/decor/SmokeTrail.h src/decor/../Classes.h src/decor/../decor/Trail.h \
+ src/decor/../decor/../Classes.h src/decor/../decor/../entity/Entity.h
+src/decor/TextFloat.o: src/decor/TextFloat.cpp src/decor/../engine/TextRenderer.h \
+ src/decor/../engine/../engine/GLColor.h \
+ src/decor/../engine/../engine/GLTexture.h \
+ src/decor/../misc/TextHandler.h \
+ src/decor/../misc/../engine/TextRenderer.h src/decor/TextFloat.h \
+ src/decor/../Classes.h src/decor/../entity/Entity.h \
+ src/decor/../entity/../Classes.h src/decor/../engine/GLColor.h
+src/decor/Cloud.o: src/decor/Cloud.cpp src/decor/../misc/Random.h \
+ src/decor/../misc/Theme.h src/decor/../misc/../Classes.h \
+ src/decor/../misc/../engine/GLColor.h src/decor/../engine/GLBitmap.h \
+ src/decor/../engine/GLColor.h src/decor/Cloud.h src/decor/../Classes.h \
+ src/decor/../entity/Entity.h src/decor/../entity/../Classes.h
+src/entity/GameWorld.o: src/entity/GameWorld.cpp src/entity/../engine/GLColor.h \
+ src/entity/../control/KeyControl.h src/entity/../control/SwitchControl.h \
+ src/entity/../control/TankControl.h src/entity/../control/../Classes.h \
+ src/entity/../control/MouseControl.h src/entity/../objects/Terrain.h \
+ src/entity/../objects/../entity/Entity.h \
+ src/entity/../objects/../entity/../Classes.h \
+ src/entity/../objects/Tank.h src/entity/../objects/../Classes.h \
+ src/entity/../objects/../engine/GLColor.h \
+ src/entity/../objects/../engine/GLBitmap.h \
+ src/entity/../objects/../engine/GLColor.h \
+ src/entity/../objects/../engine/TextRenderer.h \
+ src/entity/../objects/../engine/../engine/GLColor.h \
+ src/entity/../objects/../engine/../engine/GLTexture.h \
+ src/entity/../objects/../control/TankControl.h \
+ src/entity/../objects/Background.h src/entity/../misc/Random.h \
+ src/entity/../misc/Settings.h src/entity/../entity/Entity.h \
+ src/entity/../entity/Sorters.h src/entity/../entity/../Classes.h \
+ src/entity/GameWorld.h src/entity/../Classes.h \
+ src/entity/../entity/Physics.h
+src/entity/Sorters.o: src/entity/Sorters.cpp src/entity/Entity.h \
+ src/entity/../Classes.h
+src/entity/Airborne.o: src/entity/Airborne.cpp src/entity/../entity/GameWorld.h \
+ src/entity/../entity/../Classes.h \
+ src/entity/../entity/../entity/Physics.h src/entity/Airborne.h \
+ src/entity/../Classes.h src/entity/../entity/Entity.h
+src/game/Game.o: src/game/Game.cpp src/game/../engine/TimeKeeper.h \
+ src/game/../misc/KeyReader.h src/game/../misc/ScreenFader.h \
+ src/game/../misc/../Classes.h src/game/../misc/../engine/GLColor.h \
+ src/game/../menu/Menu.h src/game/../menu/../entity/Entity.h \
+ src/game/../menu/../entity/../Classes.h src/game/../sound/SoundSystem.h \
+ src/game/../player/Player.h src/game/../player/../Classes.h \
+ src/game/../player/../engine/GLColor.h src/game/../control/TankControl.h \
+ src/game/../control/../Classes.h src/game/Game.h src/game/../Classes.h
+src/game/TargetGame.o: src/game/TargetGame.cpp src/game/../decor/Cloud.h \
+ src/game/../decor/../Classes.h src/game/../decor/../entity/Entity.h \
+ src/game/../decor/../entity/../Classes.h src/game/../decor/TextFloat.h \
+ src/game/../decor/../engine/GLColor.h src/game/../entity/GameWorld.h \
+ src/game/../entity/../Classes.h src/game/../entity/../entity/Physics.h \
+ src/game/../objects/Target.h src/game/../objects/../Classes.h \
+ src/game/../objects/../entity/Entity.h src/game/../objects/Terrain.h \
+ src/game/../objects/Background.h src/game/../objects/TargetBoard.h \
+ src/game/../objects/Tank.h src/game/../objects/../engine/GLColor.h \
+ src/game/../objects/../engine/GLBitmap.h \
+ src/game/../objects/../engine/GLColor.h \
+ src/game/../objects/../engine/TextRenderer.h \
+ src/game/../objects/../engine/../engine/GLColor.h \
+ src/game/../objects/../engine/../engine/GLTexture.h \
+ src/game/../objects/../control/TankControl.h \
+ src/game/../objects/../control/../Classes.h \
+ src/game/../objects/TimeCounter.h src/game/../misc/Random.h \
+ src/game/../misc/KeyReader.h src/game/../misc/Settings.h \
+ src/game/../misc/Theme.h src/game/../misc/../Classes.h \
+ src/game/../misc/../engine/GLColor.h src/game/../misc/ScreenFader.h \
+ src/game/../misc/Quitting.h src/game/../menu/Menu.h \
+ src/game/../menu/../entity/Entity.h src/game/../menu/StaticText.h \
+ src/game/../menu/../menu/MenuOption.h \
+ src/game/../menu/../menu/../Classes.h \
+ src/game/../menu/../menu/../engine/GLColor.h src/game/../player/Player.h \
+ src/game/../player/../Classes.h src/game/../player/../engine/GLColor.h \
+ src/game/../engine/TimeKeeper.h src/game/../sound/SoundSystem.h \
+ src/game/TargetGame.h src/game/../Classes.h src/game/../game/Game.h \
+ src/game/../game/../Classes.h
+src/game/BattleGame.o: src/game/BattleGame.cpp src/game/../control/TankControl.h \
+ src/game/../control/../Classes.h src/game/../decor/Cloud.h \
+ src/game/../decor/../Classes.h src/game/../decor/../entity/Entity.h \
+ src/game/../decor/../entity/../Classes.h src/game/../engine/TimeKeeper.h \
+ src/game/../entity/GameWorld.h src/game/../entity/../Classes.h \
+ src/game/../entity/../entity/Physics.h src/game/../player/Player.h \
+ src/game/../player/../Classes.h src/game/../player/../engine/GLColor.h \
+ src/game/../objects/Background.h src/game/../objects/../Classes.h \
+ src/game/../objects/../entity/Entity.h src/game/../objects/Terrain.h \
+ src/game/../objects/Tank.h src/game/../objects/../engine/GLColor.h \
+ src/game/../objects/../engine/GLBitmap.h \
+ src/game/../objects/../engine/GLColor.h \
+ src/game/../objects/../engine/TextRenderer.h \
+ src/game/../objects/../engine/../engine/GLColor.h \
+ src/game/../objects/../engine/../engine/GLTexture.h \
+ src/game/../objects/../control/TankControl.h \
+ src/game/../objects/Scoreboard.h src/game/../objects/Target.h \
+ src/game/../misc/Random.h src/game/../misc/KeyReader.h \
+ src/game/../misc/Settings.h src/game/../misc/ScreenFader.h \
+ src/game/../misc/../Classes.h src/game/../misc/../engine/GLColor.h \
+ src/game/../misc/Theme.h src/game/../misc/Quitting.h \
+ src/game/../sound/SoundSystem.h src/game/../menu/StaticText.h \
+ src/game/../menu/../menu/MenuOption.h \
+ src/game/../menu/../menu/../Classes.h \
+ src/game/../menu/../menu/../engine/GLColor.h src/game/../menu/Menu.h \
+ src/game/../menu/../entity/Entity.h src/game/BattleGame.h \
+ src/game/../Classes.h src/game/../game/Game.h \
+ src/game/../game/../Classes.h
+src/game/FragGame.o: src/game/FragGame.cpp src/game/../control/TankControl.h \
+ src/game/../control/../Classes.h src/game/../decor/Cloud.h \
+ src/game/../decor/../Classes.h src/game/../decor/../entity/Entity.h \
+ src/game/../decor/../entity/../Classes.h src/game/../decor/TextFloat.h \
+ src/game/../decor/../engine/GLColor.h src/game/../engine/TimeKeeper.h \
+ src/game/../entity/GameWorld.h src/game/../entity/../Classes.h \
+ src/game/../entity/../entity/Physics.h src/game/../player/Player.h \
+ src/game/../player/../Classes.h src/game/../player/../engine/GLColor.h \
+ src/game/../objects/Background.h src/game/../objects/../Classes.h \
+ src/game/../objects/../entity/Entity.h src/game/../objects/Terrain.h \
+ src/game/../objects/Tank.h src/game/../objects/../engine/GLColor.h \
+ src/game/../objects/../engine/GLBitmap.h \
+ src/game/../objects/../engine/GLColor.h \
+ src/game/../objects/../engine/TextRenderer.h \
+ src/game/../objects/../engine/../engine/GLColor.h \
+ src/game/../objects/../engine/../engine/GLTexture.h \
+ src/game/../objects/../control/TankControl.h \
+ src/game/../objects/Scoreboard.h src/game/../objects/Target.h \
+ src/game/../misc/Random.h src/game/../misc/KeyReader.h \
+ src/game/../misc/Settings.h src/game/../misc/ScreenFader.h \
+ src/game/../misc/../Classes.h src/game/../misc/../engine/GLColor.h \
+ src/game/../misc/Theme.h src/game/../misc/Quitting.h \
+ src/game/../sound/SoundSystem.h src/game/../menu/StaticText.h \
+ src/game/../menu/../menu/MenuOption.h \
+ src/game/../menu/../menu/../Classes.h \
+ src/game/../menu/../menu/../engine/GLColor.h src/game/../menu/Menu.h \
+ src/game/../menu/../entity/Entity.h src/game/FragGame.h \
+ src/game/../Classes.h src/game/../game/Game.h \
+ src/game/../game/../Classes.h
+src/objects/Terrain.o: src/objects/Terrain.cpp src/objects/../engine/GLTexture.h \
+ src/objects/../misc/Random.h src/objects/Terrain.h \
+ src/objects/../entity/Entity.h src/objects/../entity/../Classes.h
+src/objects/Tank.o: src/objects/Tank.cpp src/objects/../engine/TextRenderer.h \
+ src/objects/../engine/../engine/GLColor.h \
+ src/objects/../engine/../engine/GLTexture.h \
+ src/objects/../entity/GameWorld.h src/objects/../entity/../Classes.h \
+ src/objects/../entity/../entity/Physics.h \
+ src/objects/../control/TankControl.h src/objects/../control/../Classes.h \
+ src/objects/../decor/SmokeTrail.h src/objects/../decor/../Classes.h \
+ src/objects/../decor/../decor/Trail.h \
+ src/objects/../decor/../decor/../Classes.h \
+ src/objects/../decor/../decor/../entity/Entity.h \
+ src/objects/../decor/../decor/../entity/../Classes.h \
+ src/objects/../decor/../engine/GLBitmap.h \
+ src/objects/../decor/../engine/GLColor.h \
+ src/objects/../decor/TextFloat.h src/objects/../decor/../entity/Entity.h \
+ src/objects/../decor/../engine/GLColor.h src/objects/../misc/Random.h \
+ src/objects/../misc/TextHandler.h \
+ src/objects/../misc/../engine/TextRenderer.h \
+ src/objects/../misc/Settings.h src/objects/../player/Player.h \
+ src/objects/../player/../Classes.h \
+ src/objects/../player/../engine/GLColor.h \
+ src/objects/../objects/Explosion.h src/objects/../objects/../Classes.h \
+ src/objects/../objects/../entity/Entity.h \
+ src/objects/../objects/../engine/GLBitmap.h \
+ src/objects/../objects/Shield.h src/objects/../objects/Bullet.h \
+ src/objects/../objects/../entity/Airborne.h \
+ src/objects/../objects/../entity/../Classes.h \
+ src/objects/../objects/../entity/../entity/Entity.h \
+ src/objects/../objects/GroundFountain.h src/objects/../objects/Terrain.h \
+ src/objects/../sound/SoundSystem.h src/objects/Tank.h \
+ src/objects/../Classes.h src/objects/../entity/Entity.h \
+ src/objects/../engine/GLColor.h src/objects/../engine/GLBitmap.h
+src/objects/Bullet.o: src/objects/Bullet.cpp src/objects/../engine/GLBitmap.h \
+ src/objects/../engine/GLColor.h src/objects/../entity/Airborne.h \
+ src/objects/../entity/../Classes.h \
+ src/objects/../entity/../entity/Entity.h \
+ src/objects/../entity/../entity/../Classes.h \
+ src/objects/../entity/GameWorld.h \
+ src/objects/../entity/../entity/Physics.h \
+ src/objects/../objects/GroundFountain.h \
+ src/objects/../objects/../Classes.h \
+ src/objects/../objects/../entity/Entity.h \
+ src/objects/../objects/Explosion.h \
+ src/objects/../objects/../engine/GLBitmap.h \
+ src/objects/../objects/Terrain.h src/objects/../misc/Settings.h \
+ src/objects/../sound/SoundSystem.h src/objects/Bullet.h \
+ src/objects/../Classes.h
+src/objects/Explosion.o: src/objects/Explosion.cpp src/objects/../engine/GLBitmap.h \
+ src/objects/../engine/GLColor.h src/objects/../sound/SoundSystem.h \
+ src/objects/../misc/Random.h src/objects/../misc/Settings.h \
+ src/objects/Explosion.h src/objects/../Classes.h \
+ src/objects/../entity/Entity.h src/objects/../entity/../Classes.h
+src/objects/Shield.o: src/objects/Shield.cpp src/objects/../engine/GLBitmap.h \
+ src/objects/../engine/GLColor.h src/objects/../objects/Bullet.h \
+ src/objects/../objects/../engine/GLBitmap.h \
+ src/objects/../objects/../entity/Airborne.h \
+ src/objects/../objects/../entity/../Classes.h \
+ src/objects/../objects/../entity/../entity/Entity.h \
+ src/objects/../objects/../entity/../entity/../Classes.h \
+ src/objects/../objects/../Classes.h src/objects/../sound/SoundSystem.h \
+ src/objects/Shield.h src/objects/../Classes.h \
+ src/objects/../entity/Entity.h
+src/objects/GroundDebris.o: src/objects/GroundDebris.cpp src/objects/../misc/Random.h \
+ src/objects/GroundDebris.h src/objects/../entity/Airborne.h \
+ src/objects/../entity/../Classes.h \
+ src/objects/../entity/../entity/Entity.h \
+ src/objects/../entity/../entity/../Classes.h \
+ src/objects/../engine/GLColor.h
+src/objects/GroundFountain.o: src/objects/GroundFountain.cpp \
+ src/objects/../objects/GroundDebris.h \
+ src/objects/../objects/../entity/Airborne.h \
+ src/objects/../objects/../entity/../Classes.h \
+ src/objects/../objects/../entity/../entity/Entity.h \
+ src/objects/../objects/../entity/../entity/../Classes.h \
+ src/objects/../objects/../engine/GLColor.h src/objects/GroundFountain.h \
+ src/objects/../Classes.h src/objects/../entity/Entity.h
+src/objects/Background.o: src/objects/Background.cpp src/objects/../decor/Cloud.h \
+ src/objects/../decor/../Classes.h \
+ src/objects/../decor/../entity/Entity.h \
+ src/objects/../decor/../entity/../Classes.h \
+ src/objects/../entity/GameWorld.h src/objects/../entity/../Classes.h \
+ src/objects/../entity/../entity/Physics.h \
+ src/objects/../engine/GLBitmap.h src/objects/../engine/GLColor.h \
+ src/objects/../misc/Random.h src/objects/../misc/Theme.h \
+ src/objects/../misc/../Classes.h src/objects/../misc/../engine/GLColor.h \
+ src/objects/Background.h src/objects/../Classes.h \
+ src/objects/../entity/Entity.h
+src/objects/Scoreboard.o: src/objects/Scoreboard.cpp \
+ src/objects/../misc/TextHandler.h \
+ src/objects/../misc/../engine/TextRenderer.h \
+ src/objects/../misc/../engine/../engine/GLColor.h \
+ src/objects/../misc/../engine/../engine/GLTexture.h \
+ src/objects/../player/Player.h src/objects/../player/../Classes.h \
+ src/objects/../player/../engine/GLColor.h src/objects/Scoreboard.h \
+ src/objects/../Classes.h src/objects/../entity/Entity.h \
+ src/objects/../entity/../Classes.h
+src/objects/Target.o: src/objects/Target.cpp src/objects/../engine/GLBitmap.h \
+ src/objects/../engine/GLColor.h src/objects/../entity/GameWorld.h \
+ src/objects/../entity/../Classes.h \
+ src/objects/../entity/../entity/Physics.h \
+ src/objects/../objects/Terrain.h \
+ src/objects/../objects/../entity/Entity.h \
+ src/objects/../objects/../entity/../Classes.h \
+ src/objects/../objects/Explosion.h src/objects/../objects/../Classes.h \
+ src/objects/../objects/../engine/GLBitmap.h src/objects/Target.h \
+ src/objects/../Classes.h src/objects/../entity/Entity.h
+src/objects/TimeCounter.o: src/objects/TimeCounter.cpp \
+ src/objects/../misc/TextHandler.h \
+ src/objects/../misc/../engine/TextRenderer.h \
+ src/objects/../misc/../engine/../engine/GLColor.h \
+ src/objects/../misc/../engine/../engine/GLTexture.h \
+ src/objects/../engine/TextRenderer.h src/objects/../sound/SoundSystem.h \
+ src/objects/TimeCounter.h src/objects/../entity/Entity.h \
+ src/objects/../entity/../Classes.h
+src/objects/TargetBoard.o: src/objects/TargetBoard.cpp \
+ src/objects/../misc/TextHandler.h \
+ src/objects/../misc/../engine/TextRenderer.h \
+ src/objects/../misc/../engine/../engine/GLColor.h \
+ src/objects/../misc/../engine/../engine/GLTexture.h \
+ src/objects/../engine/TextRenderer.h src/objects/TargetBoard.h \
+ src/objects/../Classes.h src/objects/../entity/Entity.h \
+ src/objects/../entity/../Classes.h
+src/control/SwitchControl.o: src/control/SwitchControl.cpp \
+ src/control/../misc/Settings.h src/control/SwitchControl.h \
+ src/control/TankControl.h src/control/../Classes.h
+src/control/DroneControl.o: src/control/DroneControl.cpp \
+ src/control/../control/FakeBullet.h src/control/../control/../Classes.h \
+ src/control/../control/../entity/Airborne.h \
+ src/control/../control/../entity/../Classes.h \
+ src/control/../control/../entity/../entity/Entity.h \
+ src/control/../control/../entity/../entity/../Classes.h \
+ src/control/../entity/Entity.h src/control/../entity/GameWorld.h \
+ src/control/../entity/../Classes.h \
+ src/control/../entity/../entity/Physics.h src/control/../misc/Random.h \
+ src/control/../objects/Tank.h src/control/../objects/../Classes.h \
+ src/control/../objects/../entity/Entity.h \
+ src/control/../objects/../engine/GLColor.h \
+ src/control/../objects/../engine/GLBitmap.h \
+ src/control/../objects/../engine/GLColor.h \
+ src/control/../objects/../engine/TextRenderer.h \
+ src/control/../objects/../engine/../engine/GLColor.h \
+ src/control/../objects/../engine/../engine/GLTexture.h \
+ src/control/../objects/../control/TankControl.h \
+ src/control/../objects/../control/../Classes.h \
+ src/control/DroneControl.h src/control/../Classes.h \
+ src/control/../control/TankControl.h
+src/control/FakeBullet.o: src/control/FakeBullet.cpp src/control/../entity/Entity.h \
+ src/control/../entity/../Classes.h src/control/../entity/GameWorld.h \
+ src/control/../entity/../entity/Physics.h \
+ src/control/../objects/Terrain.h \
+ src/control/../objects/../entity/Entity.h src/control/FakeBullet.h \
+ src/control/../Classes.h src/control/../entity/Airborne.h \
+ src/control/../entity/../entity/Entity.h
+src/menu/Menu.o: src/menu/Menu.cpp src/menu/../menu/MenuOption.h \
+ src/menu/../menu/../Classes.h src/menu/../menu/../engine/GLColor.h \
+ src/menu/../misc/Settings.h src/menu/../misc/KeyReader.h \
+ src/menu/../sound/SoundSystem.h src/menu/Menu.h \
+ src/menu/../entity/Entity.h src/menu/../entity/../Classes.h
+src/menu/KeySelectMenu.o: src/menu/KeySelectMenu.cpp \
+ src/menu/../control/JoyControl.h src/menu/../control/SwitchControl.h \
+ src/menu/../control/TankControl.h src/menu/../control/../Classes.h \
+ src/menu/../control/KeyControl.h src/menu/../control/MouseControl.h \
+ src/menu/../misc/KeyReader.h src/menu/../sound/SoundSystem.h \
+ src/menu/KeySelectMenu.h src/menu/../Classes.h src/menu/../menu/Menu.h \
+ src/menu/../menu/../entity/Entity.h \
+ src/menu/../menu/../entity/../Classes.h
+src/menu/MenuOption.o: src/menu/MenuOption.cpp src/menu/../misc/TextHandler.h \
+ src/menu/../misc/../engine/TextRenderer.h \
+ src/menu/../misc/../engine/../engine/GLColor.h \
+ src/menu/../misc/../engine/../engine/GLTexture.h src/menu/MenuOption.h \
+ src/menu/../Classes.h src/menu/../engine/GLColor.h
+src/menu/AscenderOption.o: src/menu/AscenderOption.cpp src/menu/AscenderOption.h \
+ src/menu/../Classes.h src/menu/../menu/MenuOption.h \
+ src/menu/../menu/../Classes.h src/menu/../menu/../engine/GLColor.h \
+ src/menu/../menu/Menu.h src/menu/../menu/../entity/Entity.h \
+ src/menu/../menu/../entity/../Classes.h
+src/menu/MultiOption.o: src/menu/MultiOption.cpp src/menu/../menu/Menu.h \
+ src/menu/../menu/../entity/Entity.h \
+ src/menu/../menu/../entity/../Classes.h src/menu/../menu/ChoiceOption.h \
+ src/menu/../menu/../Classes.h src/menu/../menu/../menu/AscenderOption.h \
+ src/menu/../menu/../menu/../Classes.h \
+ src/menu/../menu/../menu/../menu/MenuOption.h \
+ src/menu/../menu/../menu/../menu/../Classes.h \
+ src/menu/../menu/../menu/../menu/../engine/GLColor.h \
+ src/menu/../menu/../menu/../menu/Menu.h src/menu/../menu/StaticText.h \
+ src/menu/../menu/../menu/MenuOption.h src/menu/../engine/TextRenderer.h \
+ src/menu/../engine/../engine/GLColor.h \
+ src/menu/../engine/../engine/GLTexture.h src/menu/MultiOption.h \
+ src/menu/../Classes.h src/menu/../menu/DescenderOption.h \
+ src/menu/../menu/AscenderOption.h
+src/menu/StaticText.o: src/menu/StaticText.cpp src/menu/../menu/Menu.h \
+ src/menu/../menu/../entity/Entity.h \
+ src/menu/../menu/../entity/../Classes.h src/menu/StaticText.h \
+ src/menu/../menu/MenuOption.h src/menu/../menu/../Classes.h \
+ src/menu/../menu/../engine/GLColor.h
+src/menu/StaticImage.o: src/menu/StaticImage.cpp src/menu/../engine/GLBitmap.h \
+ src/menu/../engine/GLColor.h src/menu/StaticImage.h \
+ src/menu/../Classes.h src/menu/../menu/StaticText.h \
+ src/menu/../menu/../menu/MenuOption.h \
+ src/menu/../menu/../menu/../Classes.h \
+ src/menu/../menu/../menu/../engine/GLColor.h
+src/menu/SplashScreen.o: src/menu/SplashScreen.cpp src/menu/../engine/TimeKeeper.h \
+ src/menu/../engine/GLBitmap.h src/menu/../engine/GLColor.h \
+ src/menu/../menu/Menu.h src/menu/../menu/../entity/Entity.h \
+ src/menu/../menu/../entity/../Classes.h src/menu/../menu/StaticText.h \
+ src/menu/../menu/../menu/MenuOption.h \
+ src/menu/../menu/../menu/../Classes.h \
+ src/menu/../menu/../menu/../engine/GLColor.h \
+ src/menu/../menu/StaticImage.h src/menu/../menu/../Classes.h \
+ src/menu/../menu/../menu/StaticText.h src/menu/../misc/KeyReader.h \
+ src/menu/SplashScreen.h src/menu/../Classes.h
+src/misc/Random.o: src/misc/Random.cpp src/misc/Random.h
+src/misc/TextHandler.o: src/misc/TextHandler.cpp src/misc/../misc/Settings.h \
+ src/misc/TextHandler.h src/misc/../engine/TextRenderer.h \
+ src/misc/../engine/../engine/GLColor.h \
+ src/misc/../engine/../engine/GLTexture.h
+src/misc/KeyReader.o: src/misc/KeyReader.cpp src/misc/KeyReader.h
+src/misc/Settings.o: src/misc/Settings.cpp src/misc/Settings.h
+src/misc/ScreenFader.o: src/misc/ScreenFader.cpp src/misc/../engine/GLColor.h \
+ src/misc/../engine/TimeKeeper.h src/misc/ScreenFader.h \
+ src/misc/../Classes.h
+src/misc/Quitting.o: src/misc/Quitting.cpp src/misc/Quitting.h
+src/misc/Theme.o: src/misc/Theme.cpp src/misc/../engine/GLTexture.h \
+ src/misc/../engine/GLBitmap.h src/misc/../engine/GLColor.h \
+ src/misc/Theme.h src/misc/../Classes.h src/misc/../engine/GLColor.h
+src/player/Player.o: src/player/Player.cpp src/player/../objects/Tank.h \
+ src/player/../objects/../Classes.h \
+ src/player/../objects/../entity/Entity.h \
+ src/player/../objects/../entity/../Classes.h \
+ src/player/../objects/../engine/GLColor.h \
+ src/player/../objects/../engine/GLBitmap.h \
+ src/player/../objects/../engine/GLColor.h \
+ src/player/../objects/../engine/TextRenderer.h \
+ src/player/../objects/../engine/../engine/GLColor.h \
+ src/player/../objects/../engine/../engine/GLTexture.h \
+ src/player/../objects/../control/TankControl.h \
+ src/player/../objects/../control/../Classes.h \
+ src/player/../control/TankControl.h src/player/Player.h \
+ src/player/../Classes.h src/player/../engine/GLColor.h
+src/sound/SoundSystem.o: src/sound/SoundSystem.cpp src/sound/../misc/Settings.h \
+ src/sound/SoundSystem.h
+src/MainMenu.o: src/MainMenu.cpp src/menu/Menu.h src/menu/../entity/Entity.h \
+ src/menu/../entity/../Classes.h src/menu/MenuOption.h \
+ src/menu/../Classes.h src/menu/../engine/GLColor.h \
+ src/menu/FinalOption.h src/menu/../menu/MenuOption.h \
+ src/menu/../menu/Menu.h src/menu/AscenderOption.h \
+ src/menu/ChoiceOption.h src/menu/../menu/AscenderOption.h \
+ src/menu/DescenderOption.h src/menu/MultiOption.h \
+ src/menu/../menu/DescenderOption.h src/menu/StaticText.h \
+ src/menu/StaticImage.h src/menu/../menu/StaticText.h \
+ src/menu/KeySelectMenu.h src/engine/TimeKeeper.h src/engine/GLBitmap.h \
+ src/engine/GLColor.h src/misc/KeyReader.h src/misc/Settings.h \
+ src/misc/ScreenFader.h src/misc/../Classes.h \
+ src/misc/../engine/GLColor.h src/misc/Quitting.h src/game/BattleGame.h \
+ src/game/../Classes.h src/game/../game/Game.h \
+ src/game/../game/../Classes.h src/game/TargetGame.h src/game/FragGame.h \
+ src/player/Player.h src/player/../Classes.h \
+ src/player/../engine/GLColor.h src/control/KeyControl.h \
+ src/control/SwitchControl.h src/control/TankControl.h \
+ src/control/../Classes.h src/control/MouseControl.h \
+ src/control/DroneControl.h src/control/../control/TankControl.h \
+ src/sound/SoundSystem.h src/MainMenu.h src/Classes.h
+src/Main.o: src/Main.cpp src/player/Player.h src/player/../Classes.h \
+ src/player/../engine/GLColor.h src/game/BattleGame.h \
+ src/game/../Classes.h src/game/../game/Game.h \
+ src/game/../game/../Classes.h src/control/KeyControl.h \
+ src/control/SwitchControl.h src/control/TankControl.h \
+ src/control/../Classes.h src/engine/GLColor.h src/decor/SmokeTrail.h \
+ src/decor/../Classes.h src/decor/../decor/Trail.h \
+ src/decor/../decor/../Classes.h src/decor/../decor/../entity/Entity.h \
+ src/decor/../decor/../entity/../Classes.h src/decor/../engine/GLBitmap.h \
+ src/decor/../engine/GLColor.h src/objects/Bullet.h \
+ src/objects/../engine/GLBitmap.h src/objects/../entity/Airborne.h \
+ src/objects/../entity/../Classes.h \
+ src/objects/../entity/../entity/Entity.h src/objects/../Classes.h \
+ src/objects/Explosion.h src/objects/../entity/Entity.h \
+ src/objects/Terrain.h src/objects/Shield.h src/objects/Target.h \
+ src/sound/SoundSystem.h src/menu/SplashScreen.h src/menu/../Classes.h \
+ src/misc/Quitting.h src/misc/TextHandler.h \
+ src/misc/../engine/TextRenderer.h src/misc/../engine/../engine/GLColor.h \
+ src/misc/../engine/../engine/GLTexture.h src/misc/Random.h \
+ src/misc/Settings.h src/misc/ScreenFader.h src/misc/../Classes.h \
+ src/misc/../engine/GLColor.h src/MainMenu.h src/Classes.h
