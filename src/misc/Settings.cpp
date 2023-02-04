@@ -1,4 +1,6 @@
 #include <allegro.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "Settings.h"
 
@@ -64,19 +66,35 @@ const int settingDefaults[LAST_SETTING] =
 
 void Settings::loadSettings()
 {
+#ifdef __unix__
+	char *home = getenv("HOME");
+	snprintf(filenameBuffer, sizeof(filenameBuffer), "%s/.swb.ini", home? home:".");
+	override_config_file(filenameBuffer);
+#else
 	set_config_file("settings.ini");
+#endif
 
 	for (int i = 0; i < LAST_SETTING; i++)
 		setting[i] = get_config_int(settingSections[i], settingNames[i], settingDefaults[i]);
 
+#ifdef __unix__
+	snprintf(basePath, sizeof(basePath), DATADIR);
+#else
 	char tempPath[512];
 	get_executable_name(tempPath, 512);
 	replace_filename(basePath, tempPath, "", 512);
+#endif
 }
 
 void Settings::saveSettings()
 {
+#ifdef __unix__
+	char *home = getenv("HOME");
+	snprintf(filenameBuffer, sizeof(filenameBuffer), "%s/.swb.ini", home? home:".");
+	override_config_file(filenameBuffer);
+#else
 	set_config_file("settings.ini");
+#endif
 	
 	for (int i = 0; i < LAST_SETTING; i++)
 		set_config_int(settingSections[i], settingNames[i], setting[i]);

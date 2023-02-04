@@ -3,7 +3,10 @@
 
 /****************************************************************************/
 
-#include <fmod.h>
+#include <allegro.h>
+#include <aldumb.h>
+#include <unistd.h>
+#include <pthread.h>
 
 /****************************************************************************/
 
@@ -24,15 +27,19 @@ class SoundSystem
     
     // an array of all samples
 
-    static FSOUND_SAMPLE *sounds[SND_MAX];
-    static FMUSIC_MODULE *modules[MOD_MAX];
+    static SAMPLE *sounds[SND_MAX];
+    static DUH *modules[MOD_MAX];
 
     // volumes
 
     float soundVolume, musicVolume, masterVolume;
-    float moduleAtVolume[MOD_MAX];
-
+    
   public:
+
+    // dumb stuff, must be public and static for the thread function
+    static AL_DUH_PLAYER *duh_player;
+    static pthread_t duh_player_thread;
+    static pthread_mutex_t duh_player_mutex;
 
     // standard load-s and free-s
 
@@ -49,6 +56,7 @@ class SoundSystem
 
     void playSound(int id, int pan = 128, float freq = 1.0, float volume = 1.0);
     void playMusic(int id, bool looped = true, float volume = 1.0);
+    void stopMusic();
     void cutAllSounds();
 
     // constructors and destructors

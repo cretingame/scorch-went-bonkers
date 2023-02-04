@@ -35,9 +35,7 @@ TextRenderer* TextRenderer::load(const char *bitmapName, const char *metricsName
 {
 	TextRenderer *ret = NULL;
 	
-	set_color_conversion(COLORCONV_NONE);
 	BITMAP *fontBMP = load_bitmap(bitmapName, NULL);
-	set_color_conversion(COLORCONV_TOTAL);
 	
 	if (!fontBMP)
 	{

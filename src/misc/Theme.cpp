@@ -5,6 +5,7 @@
 
 #include "../engine/GLTexture.h"
 #include "../engine/GLBitmap.h"
+#include "../misc/Settings.h"
 #include "Theme.h"
 
 /*********************************************/
@@ -13,7 +14,7 @@ Theme *Theme::load(const char *name)
 {
 	static char buf[200];
 	
-	set_config_file("misc/themes.ini");
+	override_config_file(Settings::path("misc/themes.ini"));
 	
 	if (!get_config_int(name, "exists", 0))
 	{
@@ -55,7 +56,7 @@ Theme *Theme::load(const char *name)
 		for (int i = 0; i < ret->cloudsTypeCount; i++)
 		{
 			sprintf(buf,"gfx/clouds/%s_%d.tga", name, i + 1);
-			BITMAP *bmp = load_bitmap(buf, NULL);
+			BITMAP *bmp = load_bitmap(Settings::path(buf), NULL);
 			if (!bmp)
 			{
 				allegro_message("Unable to load bitmap '%s'", buf);

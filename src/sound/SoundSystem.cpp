@@ -1,7 +1,8 @@
-#include <allegro.h>
-#include <fmod.h>
-#include <fmod_errors.h>
-
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+#include <alogg.h>
+ 
 #include "../misc/Settings.h"
 
 #include "SoundSystem.h"
@@ -13,9 +14,13 @@
 //  STATICS
 // *********
 
-FSOUND_SAMPLE *SoundSystem::sounds[SND_MAX];
-FMUSIC_MODULE *SoundSystem::modules[MOD_MAX];
+SAMPLE *SoundSystem::sounds[SND_MAX];
+DUH *SoundSystem::modules[MOD_MAX];
 bool SoundSystem::loadFlag = false;
+
+AL_DUH_PLAYER *SoundSystem::duh_player = NULL;
+pthread_t SoundSystem::duh_player_thread;
+pthread_mutex_t SoundSystem::duh_player_mutex;
 
 //  CONSTRUCTORS AND DESTRUCTORS
 // ******************************
@@ -38,29 +43,49 @@ void SoundSystem::loadAll()
 	static const char *moduleFileNames[MOD_MAX] = {"mus/menu.mod"};
 	
 	loadFlag = true;
- 	if (!FSOUND_Init(44100, 32, 0))
+	reserve_voices(32, 0);
+	if(install_sound(DIGI_AUTODETECT, MIDI_NONE, NULL))
  	{
- 		allegro_message("Couldn't initialize FMOD sound.\n%s", FMOD_ErrorString(FSOUND_GetError()));
+		if (Settings::setting[GFX_FULLSCREEN]) /* don't use allegro_message when fullscreen! */
+			fprintf(stderr, "Couldn't initialize sound.\n%s\n", allegro_error);
+		else
+ 			allegro_message("Couldn't initialize sound.\n%s", allegro_error);
  		loadFlag = false;
  	}
  	
 	if (loadFlag)
 	{
+		dumb_register_packfiles();
+		pthread_mutex_init(&duh_player_mutex, NULL);
 		for (int i = 0; i < SND_MAX; i++)
 		{
-			sounds[i] = FSOUND_Sample_Load(FSOUND_UNMANAGED, Settings::path(sampleFileNames[i]), FSOUND_LOOP_OFF, 0, 0);
+			ALOGG_OGG *ogg;
+			FILE *f = fopen(Settings::path(sampleFileNames[i]), "r");
+			sounds[i] = NULL;
+			if (!f)
+			{
+				allegro_message("Couldn't load sound file: '%s': %s", sampleFileNames[i], strerror(errno));
+				continue;
+			}
+			ogg = alogg_create_ogg_from_file(f);
+			if (!ogg)
+			{
+				fclose(f);
+				allegro_message("Couldn't load sound file: '%s'", sampleFileNames[i]);
+				continue;
+			}
+			sounds[i] = alogg_create_sample_from_ogg(ogg);
+			alogg_destroy_ogg(ogg);
 			if (!sounds[i])
 				allegro_message("Couldn't load sound file: '%s'", sampleFileNames[i]);
 		}
 		
 		for (int i = 0; i < MOD_MAX; i++)
 		{
-			modules[i] = FMUSIC_LoadSong(moduleFileNames[i]);
+			modules[i] = dumb_load_mod_quick(Settings::path(moduleFileNames[i]));
 			if (!modules[i])
 			{
-				int error = FSOUND_GetError();
-				if (error != FMOD_ERR_FILE_NOTFOUND)
-					allegro_message("Error loading '%s'\n%s", Settings::path(moduleFileNames[i]), FMOD_ErrorString(error));
+				allegro_message("Error loading '%s'\n", Settings::path(moduleFileNames[i]));
 			}
 		}
 	}
@@ -70,21 +95,24 @@ void SoundSystem::loadAll()
 
 void SoundSystem::freeAll()
 {
+	if (!loadFlag) return;
+	
 	for (int i = 0; i < SND_MAX; i++)
 	{
 		if (sounds[i])
-			FSOUND_Sample_Free(sounds[i]);
+			destroy_sample(sounds[i]);
 		sounds[i] = NULL;
 	}
 	
 	for (int i = 0; i < MOD_MAX; i++)
 	{
 		if (modules[i])
-			FMUSIC_FreeSong(modules[i]);
+			unload_duh(modules[i]);
 		modules[i] = NULL;
 	}
 	
-	FSOUND_Close();
+	dumb_exit();
+	remove_sound();
 	
 	loadFlag = false;
 }
@@ -105,9 +133,12 @@ void SoundSystem::setMusicVolume(int percent)
 		percent = 0;
 	
 	musicVolume = ((float)percent) / 100.0;
-	
-	for (int i = 0; i < MOD_MAX; i++)
-		FMUSIC_SetMasterVolume(modules[i], (int)(masterVolume * musicVolume * moduleAtVolume[i] * 256.0));
+	if (SoundSystem::duh_player)
+	{
+	    pthread_mutex_lock(&SoundSystem::duh_player_mutex);
+	    al_duh_set_volume(SoundSystem::duh_player, musicVolume);
+	    pthread_mutex_unlock(&SoundSystem::duh_player_mutex);
+	}
 }
 
 /********************************/
@@ -115,25 +146,59 @@ void SoundSystem::setMusicVolume(int percent)
 void SoundSystem::setMasterVolume(int percent)
 {
 	masterVolume = ((float)percent) / 100.0;
-	setMusicVolume((int)(musicVolume * 100));
+	set_volume((int)(masterVolume * 255.0), 0);
 }
 
 //  MUSIC HANDLING
 // ****************
 
+static void *duh_player_thread_function(void *arg)
+{
+    while(1)
+    {
+	pthread_mutex_lock(&SoundSystem::duh_player_mutex);
+	/* this may be nuked if things fail in set_music_pattern */
+	if (SoundSystem::duh_player)
+	    al_poll_duh(SoundSystem::duh_player);
+	pthread_mutex_unlock(&SoundSystem::duh_player_mutex);
+	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+	usleep(10000);
+	pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
+    }
+    return NULL;
+}
+
 void SoundSystem::playMusic(int id, bool looped, float volume)
 {
+  stopMusic();
+  
   if ((!modules[id]) || (!loadFlag)) return;
 
-  int realVolume = (int)(masterVolume * musicVolume * volume * 256.0);
+  duh_player = al_start_duh(modules[id], 2, 0, musicVolume, 4096, 44100);
+  if (!looped)
+    dumb_it_set_loop_callback(
+      duh_get_it_sigrenderer(al_duh_get_sigrenderer(duh_player)),
+      dumb_it_callback_terminate, NULL);
 
-  FMUSIC_SetMasterVolume(modules[id], realVolume);
-  FMUSIC_SetLooping(modules[id], looped);
+  if (pthread_create(&duh_player_thread, NULL,
+          duh_player_thread_function, NULL))
+  {
+    al_stop_duh(duh_player);
+    duh_player = NULL;
+  }
+}
 
-  if (!FMUSIC_PlaySong(modules[id]))
-    allegro_message("FMOD Error: %s %d", FMOD_ErrorString(FSOUND_GetError()), realVolume);
-
-  moduleAtVolume[id] = volume;
+void SoundSystem::stopMusic()
+{
+    if (duh_player)
+    {
+        /* stop the player thread */
+        pthread_cancel(duh_player_thread);
+        pthread_join(duh_player_thread, NULL);
+        /* and clean up */
+        al_stop_duh(duh_player);
+        duh_player = NULL;
+    }
 }
 
 //  SOUND HANDLING
@@ -143,19 +208,9 @@ void SoundSystem::playSound(int id, int pan, float freq, float volume)
 {
   if ((!sounds[id]) || (!loadFlag)) return;
   if (!Settings::setting[SND_SFX]) return;
-
-  int realVolume = (int)(masterVolume * soundVolume * volume * 255.0);
-  int realFreq = (int)(44100.0 * freq);
-
-  int channel = FSOUND_PlaySoundEx(FSOUND_FREE, sounds[id], NULL, true);
-
-  if (channel == -1)
-    allegro_message("FMOD Error: %s", FMOD_ErrorString(FSOUND_GetError()));
-
-  FSOUND_SetPan(channel, pan);
-  FSOUND_SetFrequency(channel, realFreq);
-  FSOUND_SetVolume(channel, realVolume);
-  FSOUND_SetPaused(channel, false);
+  
+  play_sample(sounds[id], (int)(soundVolume * volume * 255.0), pan,
+    (int)(freq * 1000.0), 0);
 }
 
 /********************************/
@@ -163,13 +218,14 @@ void SoundSystem::playSound(int id, int pan, float freq, float volume)
 void SoundSystem::cutAllSounds()
 {
   if (!loadFlag) return;
-
-  FSOUND_StopSound(FSOUND_ALL);
+  
+  for (int i = 0; i < SND_MAX; i++)
+  {
+    if (sounds[i])
+      stop_sample(sounds[i]);
+  }
 }
 
 /*******************************************************************************/
 
 SoundSystem *soundSys;
-
-
-

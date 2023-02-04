@@ -57,14 +57,26 @@ void initAllegro()
 	
 	set_color_depth(32);
 	request_refresh_rate(100);
+	/* don't convert bitmap's as we don't use the allegro bitmap accept
+	   for loading bitmaps for textures in which case we want to keep
+	   the bitmaps in their native format */
+	set_color_conversion(COLORCONV_NONE);
 	
 	if (set_gfx_mode(GFX_OPENGL, 800, 600, 0, 0) != 0)
 	{
-		allegro_gl_set(AGL_SUGGEST, suggested);
+		/* try again with a 16 bpp colordepth */
+		allegro_gl_set(AGL_COLOR_DEPTH, 16);
+		set_color_depth(16);
 		if (set_gfx_mode(GFX_OPENGL, 800, 600, 0, 0) != 0)
 		{
-			allegro_message("Error setting up display: %s\nPlease adjust settings.ini and set a workable resolution.", allegro_error);
-			exit(-1);
+			/* try again with "any" settings */
+			allegro_gl_set(AGL_SUGGEST, suggested);
+			if (set_gfx_mode(GFX_OPENGL, 800, 600, 0, 0) != 0)
+			{
+				allegro_message("Error setting up display: %s\nPlease adjust settings.ini and set a workable resolution.", allegro_error);
+				exit(-1);
+			}
+			set_color_depth(allegro_gl_get(AGL_COLOR_DEPTH));
 		}
 	};
 	

@@ -1,3 +1,6 @@
+PREFIX = /usr
+BINDIR = $(PREFIX)/bin
+DATADIR = $(PREFIX)/share/scorchwentbonkers
 OBJS = src/engine/FPSCounter.o  \
   src/engine/TimeKeeper.o  \
   src/engine/TimeRoutines.o \
@@ -53,18 +56,19 @@ OBJS = src/engine/FPSCounter.o  \
 SRCS = $(subst .o,.cpp,$(OBJS))
 OBJS_D = $(subst /,\,$(OBJS))
 DEPENDS = Makefile.dep
-LIBS = -static-libgcc -static-libstdc++ -lfmod -ljpgalleg -lalleggl -lalleg44 -lglu32 -lopengl32 -luser32 -lgdi32 -lwinmm
-EXENAME = swb.exe
+LIBS = -ljpgalleg -lalleggl `allegro-config --libs` `pkg-config --libs AllegroOGG` -lGL -lGLU -ldumb -laldmb -lpthread
+EXENAME = swb
 
 CXX = g++
-RM = del /q
-MV = ren
+RM = rm -f
+MV = mv
 
-CXXFLAGS = -Wall -g
+OPTFLAGS = -g -Wall -O2
+CXXFLAGS = $(OPTFLAGS) `pkg-config --cflags AllegroOGG` -DDATADIR=\"$(DATADIR)/\"
 DEPFLAGS = -MM
 
-DISTEXENAME = scorchwentbonkers.exe
-DISTFLAGS = -Wall -s -O3
+DISTEXENAME = scorchwentbonkers
+DISTFLAGS = $(OPTFLAGS) `pkg-config --cflags AllegroOGG` -DDATADIR=\"$(DATADIR)/\"
 DISTNAME = scorch-went-bonkers-win.zip
 DISTFILES = fonts gfx misc mus snd alleg44.dll fmod.dll LICENSE
 
@@ -72,10 +76,10 @@ SRCDISTNAME = scorch-went-bonkers-src.zip
 SRCDISTFILES = Makefile Makefile.dep LICENSE src fonts gfx misc mus snd
 
 $(EXENAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) src/icon.res $(LIBS) -o $(EXENAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) $(LIBS) -o $(EXENAME)
 
 $(DISTEXENAME): $(OBJS)
-	$(CXX) $(DISTFLAGS) $(OBJS) src/icon.res $(LIBS) -o $(DISTEXENAME)
+	$(CXX) $(DISTFLAGS) $(OBJS) $(LIBS) -o $(DISTEXENAME)
 
 unlink:
 	$(RM) $(EXENAME)
@@ -120,4 +124,10 @@ dist: $(DISTNAME) $(SRCDISTNAME)
 
 include $(DEPENDS)
 
-.PHONY: clean veryclean depend dist unlink
+install: $(DISTEXENAME)
+	mkdir -p $(BINDIR)
+	mkdir -p $(DATADIR)
+	install -m 755 $(DISTEXENAME) $(BINDIR)
+	cp -a fonts gfx misc mus snd $(DATADIR)
+
+.PHONY: clean veryclean depend dist unlink install
